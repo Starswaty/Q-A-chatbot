@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial; margin: 30px; background: #f4f4f4; }
+        .chatbox { max-width: 700px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        .bubble { padding: 10px 15px; margin: 10px; border-radius: 10px; max-width: 80%; }
+        .user { background: #d0f0ff; text-align: right; margin-left: auto; }
+        .bot { background: #e8e8e8; text-align: left; margin-right: auto; }
+        form { margin-top: 20px; display: flex; gap: 10px; }
+        input[type="text"] { flex-grow: 1; padding: 10px; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+<div class="chatbox">
+    <h2>PDF Chat</h2>
+    <div>
+        {% for user, bot in chat_history %}
+            <div class="bubble user">{{ user }}</div>
+            <div class="bubble bot">{{ bot }}</div>
+        {% endfor %}
+    </div>
+    <form method="post" action="/chat">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+        <input type="text" name="message" placeholder="Ask something..." required>
+        <button type="submit">Send</button>
+    </form>
+</div>
+</body>
+</html>
